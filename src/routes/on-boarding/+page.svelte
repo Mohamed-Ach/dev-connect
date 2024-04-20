@@ -20,7 +20,7 @@
 	let isDark: boolean = $page.data.theme === 'dark';
 
 	// ** Section navigation :
-	let currentSection: number = 4;
+	let currentSection: number = 1;
 	let previousSection: number = 0;
 
 	const ui_lib1 = [
