@@ -13,7 +13,7 @@
 		class="flex-none text-slate-600 dark:text-white text-sm font-normal items-center lg:flex hidden overflow-hidden text-ellipsis whitespace-nowrap"
 	>
 		<span class="overflow-hidden text-ellipsis whitespace-nowrap w-[85px] block">
-			Albert Flores
+			Abderrahmane
 		</span>
 		<span class="text-base inline-block ltr:ml-[10px] rtl:mr-[10px]">
 			<IconChevronDown stroke={1.25} />
