@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 
 	import IconUser from '@tabler/icons-svelte/IconUser.svelte';
@@ -7,9 +7,9 @@
 	export let wrapperClass = 'inline-block';
 	export let labelClass = 'label-class-custom';
 	export let classMenuItems = 'mt-2 w-[220px]';
-	export let childComponent: any;
+	export let childComponent: any = null;
 
-	let items = [
+	export let items: any = [
 		{
 			label: 'Action',
 			link: '#',
@@ -49,6 +49,19 @@
 
 	export let open: boolean;
 
+	const handleClickOutside = (event: MouseEvent) => {
+		const target = event.target as HTMLElement;
+		const relativeAncestor = target.closest('.relative');
+
+		if (!relativeAncestor) {
+			open = false;
+		}
+	};
+
+	onMount(() => {
+		document.addEventListener('click', handleClickOutside);
+	});
+
 	const hasChild = !!$$slots.default;
 </script>
 
@@ -60,9 +73,11 @@
 				open = !open;
 			}}
 		>
-			<div class={labelClass}>
-				<svelte:component this={childComponent} />
-			</div>
+			{#if childComponent}
+				<div class={labelClass}>
+					<svelte:component this={childComponent} />
+				</div>
+			{/if}
 		</button>
 		<div
 			in:fade
@@ -78,13 +93,12 @@
 					{#each items as item}
 						<!-- svelte-ignore a11y-no-static-element-interactions -->
 						<div>
-							<!-- key={index} -->
 							<!-- svelte-ignore missing-declaration -->
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
 							<div
 								class={`${
 									item.active
-										? 'bg-slate-100 text-slate-900 dark:bg-slate-600 dark:text-slate-300 dark:bg-opacity-50'
+										? 'hover:bg-slate-400 bg-slate-100 text-slate-900 dark:bg-slate-600 dark:text-slate-300 dark:bg-opacity-50'
 										: 'text-slate-600 dark:text-slate-300'
 								} block     ${
 									item.hasDivider ? 'border-t border-slate-100 dark:border-slate-700' : ''

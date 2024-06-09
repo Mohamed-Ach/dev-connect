@@ -1,5 +1,6 @@
 <script lang="ts">
-	import IconBubbleText from '@tabler/icons-svelte/IconBubbleText.svelte';
+	// ** Icons
+	import IconBrandSafari from '@tabler/icons-svelte/IconBrandSafari.svelte';
 	import IconUsersGroup from '@tabler/icons-svelte/IconUsersGroup.svelte';
 	import IconFolders from '@tabler/icons-svelte/IconFolders.svelte';
 	import IconHome from '@tabler/icons-svelte/IconHome.svelte';
@@ -24,19 +25,19 @@
 			</a>
 		</li>
 		<li>
-			<a href="/forum" class="flex flex-1 items-center space-x-[6px] rtl:space-x-reverse">
+			<a href="/browse" class="flex flex-1 items-center space-x-[6px] rtl:space-x-reverse">
 				<span class="icon-box">
-					<IconBubbleText stroke={1.5} />
+					<IconUsersGroup stroke={1.5} />
 				</span>
 				<div class="text-box">Forum</div>
 			</a>
 		</li>
 		<li>
-			<a href="/teams" class="flex flex-1 items-center space-x-[6px] rtl:space-x-reverse">
+			<a href="/discover" class="flex flex-1 items-center space-x-[6px] rtl:space-x-reverse">
 				<span class="icon-box">
-					<IconUsersGroup stroke={1.5} />
+					<IconBrandSafari stroke={1.5} />
 				</span>
-				<div class="text-box">Teams</div>
+				<div class="text-box">Discover</div>
 			</a>
 
 			<!-- {#if item.child}

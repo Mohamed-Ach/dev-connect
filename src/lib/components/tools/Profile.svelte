@@ -52,18 +52,21 @@
 		</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<div
-			class="hover:bg-slate-200 text-slate-600 dark:text-slate-300"
-			on:click={() => menuClick('/settings')}
-		>
-			<div class="border-t border-slate-100 dark:border-slate-700 block cursor-pointer px-4 py-2">
-				<div class="flex items-center">
-					<span class="block text-xl ltr:mr-3 rtl:ml-3">
-						<IconLogout2 stroke={2} />
-					</span>
-					<span class="block text-sm">Logout</span>
-				</div>
-			</div>
+		<div class="hover:bg-slate-200 text-slate-600 dark:text-slate-300">
+			<form method="POST">
+				<button formaction="/logout">
+					<div
+						class="border-t border-slate-100 dark:border-slate-700 block cursor-pointer px-4 py-2"
+					>
+						<div class="flex items-center">
+							<span class="block text-xl ltr:mr-3 rtl:ml-3">
+								<IconLogout2 stroke={2} />
+							</span>
+							<span class="block text-sm">Logout</span>
+						</div>
+					</div>
+				</button>
+			</form>
 		</div>
 	</div>
 	<!-- {#each ProfileMenu as item}

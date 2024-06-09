@@ -1,19 +1,23 @@
 <script lang="ts">
+	// ** Import libraries :
 	import { MultiSelect } from 'svelte-multiselect';
 	import { fade, fly } from 'svelte/transition';
 	import { cubicIn } from 'svelte/easing';
 	import { page } from '$app/stores';
 
+	// ** Import Static Data :
+	import { languages, technologies, categories } from '$lib/store';
+
 	// ** Import icons :
 	import IconArrowNarrowRight from '@tabler/icons-svelte/IconArrowNarrowRight.svelte';
 
-	// Import images :
+	// ** Import images :
 	import onBoarding from '$lib/images/all-img/on-boarding.png';
 	import logoWhite from '$lib/images/logo/logo-white.svg';
 	import logo from '$lib/images/logo/logo.svg';
 
+	// ** Import components :
 	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
 	import TextArea from '$lib/components/ui/TextArea.svelte';
 
 	// Check if dark mode is enabled :
@@ -22,238 +26,6 @@
 	// ** Section navigation :
 	let currentSection: number = 1;
 	let previousSection: number = 0;
-
-	const ui_lib1 = [
-		'Javascript',
-		'Typescript',
-		'Python',
-		'Java',
-		'C++',
-		'C#',
-		'Ruby',
-		'PHP',
-		'Swift',
-		'Kotlin',
-		'Rust',
-		'Go',
-		'Scala',
-		'Perl',
-		'Lua',
-		'Haskell',
-		'Erlang',
-		'Clojure',
-		'F#',
-		'R',
-		'Dart',
-		'Julia',
-		'Groovy',
-		'Objective-C',
-		'Shell',
-		'PowerShell',
-		'SQL',
-		'HTML',
-		'CSS',
-		'SASS',
-		'LESS',
-		'SCSS',
-		'Stylus',
-		'PostCSS',
-		'GraphQL'
-	];
-	const ui_lib2 = [
-		'TailwindCSS',
-		'Bootstrap',
-		'Materialize',
-		'Bulma',
-		'Ant Design',
-		'Chakra UI',
-		'Material UI',
-		'Semantic UI',
-		'Foundation',
-		'UIKit',
-		'Flutter',
-		'React',
-		'Vue',
-		'Angular',
-		'Svelte',
-		'Ember',
-		'Backbone',
-		'Meteor',
-		'Polymer',
-		'Aurelia',
-		'Mithril',
-		'Preact',
-		'Alpine.js',
-		'Stimulus',
-		'Marko',
-		'Solid.js',
-		'Blitz.js',
-		'Nuxt.js',
-		'Next.js',
-		'Gatsby',
-		'Sapper',
-		'Gridsome',
-		'Astro',
-		'Redwood.js',
-		'AngularJS',
-		'jQuery',
-		'Lodash',
-		'Underscore',
-		'Moment.js',
-		'Day.js',
-		'Luxon',
-		'date-fns',
-		'Ramda',
-		'RxJS',
-		'Redux',
-		'MobX',
-		'Vuex',
-		'Apollo',
-		'Relay',
-		'React Query',
-		'SWR',
-		'Zustand',
-		'Recoil',
-		'Jotai',
-		'Redux Toolkit',
-		'Easy Peasy',
-		'Overmind',
-		'MobX State Tree',
-		'XState',
-		'React Hook Form',
-		'Formik',
-		'Yup',
-		'Zod',
-		'Joi',
-		'Superstruct',
-		'Ajv',
-		'Yup',
-		'Zod',
-		'Joi',
-		'Superstruct',
-		'Ajv',
-		'React Router',
-		'Reach Router',
-		'Next.js Router',
-		'Vue Router',
-		'Nuxt.js Router'
-	];
-	const ui_lib3 = [
-		'Computer Science',
-		'Software Engineering',
-		'Web Development',
-		'Mobile Development',
-		'Game Development',
-		'Data Science',
-		'Machine Learning',
-		'Artificial Intelligence',
-		'Cybersecurity',
-		'Cloud Computing',
-		'DevOps',
-		'Blockchain',
-		'Internet of Things',
-		'Big Data',
-		'Quantum Computing',
-		'Augmented Reality',
-		'Virtual Reality',
-		'Embedded Systems',
-		'Robotics',
-		'Natural Language Processing',
-		'Computer Vision',
-		'Human-Computer Interaction',
-		'User Experience Design',
-		'User Interface Design',
-		'Frontend Development',
-		'Backend Development',
-		'Fullstack Development',
-		'Database Management',
-		'Network Engineering',
-		'Systems Administration',
-		'IT Support',
-		'Technical Writing',
-		'Technical Training',
-		'Project Management',
-		'Product Management',
-		'Quality Assurance',
-		'Software Testing',
-		'Software Architecture',
-		'Software Development',
-		'Software Maintenance',
-		'Software Deployment',
-		'Software Documentation',
-		'Software Licensing',
-		'Software Compliance',
-		'Software Security',
-		'Software Auditing',
-		'Software Monitoring',
-		'Software Optimization',
-		'Software Debugging',
-		'Software Performance',
-		'Software Scalability',
-		'Software Reliability',
-		'Software Resilience',
-		'Software Recovery',
-		'Software Backup',
-		'Software Restoration',
-		'Software Migration',
-		'Software Integration',
-		'Software Interoperability',
-		'Software Portability',
-		'Software Usability',
-		'Software Accessibility',
-		'Software Inclusivity',
-		'Software Diversity',
-		'Software Equity',
-		'Software Ethics',
-		'Software Governance',
-		'Software Regulation',
-		'Software Compliance',
-		'Software Auditing',
-		'Software Monitoring',
-		'Software Optimization',
-		'Software Debugging',
-		'Software Performance',
-		'Software Scalability',
-		'Software Reliability',
-		'Software Resilience',
-		'Software Recovery',
-		'Software Backup',
-		'Software Restoration',
-		'Software Migration',
-		'Software Integration',
-		'Software Interoperability',
-		'Software Portability',
-		'Software Usability',
-		'Software Accessibility',
-		'Software Inclusivity',
-		'Software Diversity',
-		'Software Equity',
-		'Software Ethics',
-		'Software Governance',
-		'Software Regulation',
-		'Software Compliance',
-		'Software Auditing',
-		'Software Monitoring',
-		'Software Optimization',
-		'Software Debugging',
-		'Software Performance',
-		'Software Scalability',
-		'Software Reliability',
-		'Software Resilience',
-		'Software Recovery',
-		'Software Backup',
-		'Software Restoration',
-		'Software Migration',
-		'Software Integration',
-		'Software Interoperability',
-		'Software Portability',
-		'Software Usability',
-		'Software Accessibility',
-		'Software Inclusivity',
-		'Software Diversity',
-		'Software Equity',
-		'Software Ethics'
-	];
 </script>
 
 <div class={isDark ? 'dark' : 'light'}>
@@ -398,7 +170,7 @@
 									<!-- Select -->
 									<MultiSelect
 										placeholder="Select languages..."
-										options={ui_lib1}
+										options={languages}
 										ulOptionsStyle=""
 										liOptionStyle=""
 										liSelectedStyle="background-color: #000; color: #fff;"
@@ -418,7 +190,7 @@
 									<!-- Select -->
 									<MultiSelect
 										placeholder="Select technologies..."
-										options={ui_lib2}
+										options={technologies}
 										ulOptionsStyle=""
 										liOptionStyle=""
 										liSelectedStyle="background-color: #000; color: #fff;"
@@ -437,7 +209,7 @@
 									<!-- Select -->
 									<MultiSelect
 										placeholder="Select Interests..."
-										options={ui_lib3}
+										options={categories}
 										ulOptionsStyle=""
 										liOptionStyle=""
 										liSelectedStyle="background-color: #000; color: #fff;"

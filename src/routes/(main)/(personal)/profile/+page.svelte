@@ -17,12 +17,12 @@
 	import Badge from '$lib/components/ui/Badge.svelte';
 
 	let profile = {
-		name: 'Abderrahmane El Harrachy',
+		name: 'Mohamed Achernan',
 		role: 'DevOps Engineer',
 		balance: '5',
 		boardCard: '200',
 		calendarEvents: '3200',
-		email: 'abde-elharrachy@devconnect.com',
+		email: 'mohamed.achernan219@devconnect.com',
 		phone: '100%',
 		location: 'Milan, IT',
 		joinedDate: '16 April, 2024'

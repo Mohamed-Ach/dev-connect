@@ -167,7 +167,7 @@ export default {
       const newUtilities = {
         ".scrollbar-thin": {
           scrollbarWidth: "thin",
-          scrollbarColor: "rgba(209, 213, 219, 0.5) rgba(209, 213, 219, 0.1)",
+          scrollbarColor: "rgba(209, 213, 219, 0.1)",
         },
         ".scrollbar-webkit": {
           "&::-webkit-scrollbar": {

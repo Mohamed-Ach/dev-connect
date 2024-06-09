@@ -12,7 +12,7 @@
 	import card7 from '$lib/images/all-img/card-7.png';
 
 	import target from '$lib/images/all-img/target.png';
-	import t1 from '$lib/images/all-img/t1.png';
+	import t1 from '$lib/images/users/denniz.jpg';
 
 	// Importing Icons :
 	import IconBrandFacebook from '@tabler/icons-svelte/IconBrandFacebookFilled.svelte';
@@ -31,10 +31,6 @@
 	function handleThemeChange(event: CustomEvent<{ isDark: boolean }>) {
 		isDark = event.detail.isDark;
 	}
-	onMount(() => {
-		if (isDark) document.body.classList.add('dark');
-		else document.body.classList.remove('dark');
-	});
 </script>
 
 <div dir="ltr" class="app-warp {isDark ? 'dark' : 'light'} skin--default">
@@ -97,8 +93,8 @@
 							Accelerate Innovation
 						</h2>
 						<p class="max-w-3xl mx-auto mt-4 text-xl text-center">
-							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-							mollit anim id est laborum
+							When you join the community, you open up a world of opportunities to connect and get
+							involved.
 						</p>
 					</div>
 				</div>
@@ -122,8 +118,8 @@
 								<img src={card6} alt="" class="block w-full h-full object-cover rounded-md" />
 							</div>
 							<div class="text-sm">
-								Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod tempor
-								incididun ut .
+								You can now launch your own projects and find collaborators to work with you on
+								carrying it to success. it's never been easier.
 							</div>
 							<div class="mt-4 space-x-4 rtl:space-x-reverse">
 								<a href="null" class="btn-link"> Learn more </a>
@@ -135,8 +131,8 @@
 								<img src={card7} alt="" class="block w-full h-full object-cover rounded-md" />
 							</div>
 							<div class="text-sm">
-								Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod tempor
-								incididun ut .
+								One of the advantages of utilizing Dev Connect is finding talent with different
+								skills quickly as our needs change.
 							</div>
 							<div class="mt-4 space-x-4 rtl:space-x-reverse">
 								<a href="null" class="btn-link"> Learn more </a>
@@ -157,8 +153,8 @@
 						We're experts and brand creators
 					</h2>
 					<p class="max-w-3xl mx-auto mt-4 text-xl text-center">
-						Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-						mollit anim id est laborum
+						Dev Connect enables us to differentiate ourselves from our competitors and produce
+						content at a higher caliber.
 					</p>
 				</div>
 				<div class="grid lg:gap-8 lg:grid-cols-2 lg:items-center">
@@ -173,8 +169,8 @@
 								<div class="ml-4">
 									<h4 class="text-5xl font-medium italic font-merriweather">79%</h4>
 									<p class="mt-4">
-										Lorem ipsum is placeholder text used in the graphic, print, and publishing for
-										previewing layouts.
+										Almost 4 out of 5 users have reported that dev connect had significant impact on
+										their projects coming to life.
 									</p>
 								</div>
 							</div>
@@ -187,8 +183,7 @@
 								<div class="ml-4">
 									<h4 class="text-5xl font-medium italic font-merriweather">5M+</h4>
 									<p class="mt-4">
-										Lorem ipsum is placeholder text used in the graphic, print, and publishing for
-										previewing layouts.
+										The platform is host to over 5 million users, and we are growing every day.
 									</p>
 								</div>
 							</div>
@@ -203,8 +198,8 @@
 								<div class="ml-4">
 									<h4 class="text-5xl font-medium italic font-merriweather">500K</h4>
 									<p class="mt-4">
-										Lorem ipsum is placeholder text used in the graphic, print, and publishing for
-										previewing layouts.
+										More than half a million projects have been completed on the platform, and the
+										number is always growing.
 									</p>
 								</div>
 							</div>
@@ -234,8 +229,8 @@
 						We have worked with thousands of amazing people
 					</h2>
 					<p class="max-w-3xl mx-auto mt-4 text-xl text-center">
-						Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-						mollit anim id est laborum
+						We're proud to have worked with some of the best in the industry. Here's what they have
+						to say about it
 					</p>
 				</div>
 				<div class="flex justify-center items-center">
@@ -249,12 +244,12 @@
 								</div>
 								<div class="flex-1">
 									<div class="mb-4 text-base">
-										“Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sintsin.
-										Velit officia consequat duis enim of velit mollit.”
+										“I'm proud to have given the chance to work on this amazing project, and I will
+										continue giving it my best. ”
 									</div>
 									<div class="space-x-5">
-										<span class="inline-block font-medium text-base"> Marvin McKinney </span>
-										<span class="inline-block">CEO at Bitspin</span>
+										<span class="inline-block font-medium text-base"> Yassine Gliouel </span>
+										<span class="inline-block">Future Developer</span>
 									</div>
 								</div>
 							</div>
@@ -272,22 +267,22 @@
 					<div>
 						<ul class="flex md:justify-start justify-center space-x-3">
 							<li>
-								<a href="null" class="social-link">
+								<a href="https://www.facebook.com" class="social-link">
 									<IconBrandFacebook size={18} />
 								</a>
 							</li>
 							<li>
-								<a href="null" class="social-link">
+								<a href="https://www.x.com" class="social-link">
 									<IconBrandTwitter size={18} />
 								</a>
 							</li>
 							<li>
-								<a href="null" class="social-link">
+								<a href="https://www.linkedin.com" class="social-link">
 									<IconBrandLinkedin stroke={2} size={18} />
 								</a>
 							</li>
 							<li>
-								<a href="null" class="social-link">
+								<a href="https://www.google.com" class="social-link">
 									<IconBrandGoogle size={18} />
 								</a>
 							</li>

@@ -1,6 +1,9 @@
 <script lang="ts">
+	import type { ActionData } from './$types';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+
+	export let form: ActionData;
 
 	// importing images :
 	import logo from '$lib/images/logo/logo.svg';
@@ -30,7 +33,7 @@
 			Create an account to start using Dev Connect
 		</div>
 	</div>
-	<RegForm />
+	<RegForm {form} />
 	<div class="relative border-b-[#9AA2AF] border-opacity-[16%] border-b pt-6">
 		<div
 			class="absolute inline-block bg-white dark:bg-slate-800 left-1/2 top-1/2 transform -translate-x-1/2 px-4 min-w-max text-sm text-slate-500 dark:text-slate-400 font-normal"

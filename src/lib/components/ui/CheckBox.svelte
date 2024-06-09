@@ -1,13 +1,13 @@
 <script lang="ts">
 	import ckWhite from '$lib/images/icon/ck-white.svg';
 
-	export let id: string;
-	export let disabled: boolean = false;
-	export let label: string;
-	export let value: boolean;
-	export let name: string;
 	export let activeClass: string =
 		'ring-black-500 bg-slate-900 dark:bg-slate-700 dark:ring-slate-700';
+	export let disabled: boolean = false;
+	export let value: boolean;
+	export let label: string;
+	export let name: string;
+	export let id: string;
 </script>
 
 <label
