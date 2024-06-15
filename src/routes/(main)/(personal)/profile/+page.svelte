@@ -28,7 +28,7 @@
 	}
 
 	export let data;
-
+	const date = data.userData?.createAt || new Date();
 	let profile = {
 		name: data.userData?.firstName + ' ' + data.userData?.lastName,
 		role: data.userData?.title,
@@ -37,7 +37,7 @@
 		calendarEvents: '0',
 		email: data.userData?.email,
 		phone: '100%',
-		joinedDate: formatDate(data.userData?.createAt)
+		joinedDate: formatDate(date)
 	};
 </script>
 

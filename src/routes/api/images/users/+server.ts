@@ -1,6 +1,5 @@
 // Import necessary modules
 import { client } from '$lib/lucia/prisma'
-import fs from 'fs/promises'
 import crypto from 'crypto'
 
 export const POST = (async ({ request }) => {

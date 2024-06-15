@@ -1,5 +1,5 @@
 // Import necessary modules
-import fs from 'fs/promises'
+import { client } from '$lib/lucia/prisma'
 import crypto from 'crypto'
 
 export const POST = (async ({ request }) => {
@@ -20,6 +20,7 @@ export const POST = (async ({ request }) => {
     }
 
     try {
+
         // Get the file buffer
         const buffer = Buffer.from(await image.arrayBuffer())
 
@@ -30,9 +31,14 @@ export const POST = (async ({ request }) => {
         let newFileName = crypto.randomBytes(15).toString('hex') + crypto.randomBytes(15).toString('hex')
         newFileName = newFileName + '.' + fileName.split('.').pop()
 
-        // Save the uploaded file to the assets directory
-        await fs.writeFile("./server/projects/" + newFileName, buffer)
-
+        await client.attachment.create({
+            data: {
+                id: crypto.randomUUID(),
+                attachment: buffer,
+                type: "project",
+                name: newFileName,
+            },
+        })
         return new Response(
             JSON.stringify({ name: newFileName }), {
             headers: {

@@ -41,35 +41,4 @@ export const GET = (async ({ params }) => {
             status: 500,
         })
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    let assets = await getFiles()
-    const reader = assets.find(img => img.name === id)
-
-    if (!reader) {
-        return new Response(
-            JSON.stringify({ error: 'Image not found' }), {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            status: 404,
-        })
-    }
-
-    return read(reader.url)
 })
