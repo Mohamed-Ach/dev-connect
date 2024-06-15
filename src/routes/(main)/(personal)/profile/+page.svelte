@@ -37,7 +37,7 @@
 		calendarEvents: '0',
 		email: data.userData?.email,
 		phone: '100%',
-		joinedDate: formatDate(data.userData?.dateCreated)
+		joinedDate: formatDate(data.userData?.createAt)
 	};
 </script>
 
@@ -58,7 +58,7 @@
 						>
 							{#if data.userData && data.userData.avatar}
 								<img
-									src={$page.url.origin + '/api/images/users' + data.userData.avatar}
+									src={$page.url.origin + '/api/images/users/' + data.userData.avatar}
 									alt="Avatar"
 									class="w-full h-full object-cover rounded-full"
 								/>
