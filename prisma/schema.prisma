@@ -63,3 +63,14 @@ model Email_Verification {
 
   @@index([user_id])
 }
+
+
+
+model Attachment {
+  id            String        @id @map("_id")
+  name          String        @unique
+  type          String        
+  attachment    Bytes
+  createAt      DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
