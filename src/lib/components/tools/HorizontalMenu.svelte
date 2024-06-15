@@ -2,18 +2,19 @@
 	// ** Icons
 	import IconBrandSafari from '@tabler/icons-svelte/IconBrandSafari.svelte';
 	import IconUsersGroup from '@tabler/icons-svelte/IconUsersGroup.svelte';
+	import IconFolderPlus from '@tabler/icons-svelte/IconFolderPlus.svelte';
+	import IconCopyPlus from '@tabler/icons-svelte/IconCopyPlus.svelte';
 	import IconFolders from '@tabler/icons-svelte/IconFolders.svelte';
-	import IconHome from '@tabler/icons-svelte/IconHome.svelte';
 </script>
 
 <div class="main-menu">
 	<ul>
 		<li>
-			<a href="/" class="flex flex-1 items-center space-x-[6px] rtl:space-x-reverse">
+			<a href="/posts/browse" class="flex flex-1 items-center space-x-[6px] rtl:space-x-reverse">
 				<span class="icon-box">
-					<IconHome stroke={1.5} />
+					<IconUsersGroup stroke={1.5} />
 				</span>
-				<div class="text-box">Home</div>
+				<div class="text-box">Forum</div>
 			</a>
 		</li>
 		<li>
@@ -25,19 +26,27 @@
 			</a>
 		</li>
 		<li>
-			<a href="/browse" class="flex flex-1 items-center space-x-[6px] rtl:space-x-reverse">
-				<span class="icon-box">
-					<IconUsersGroup stroke={1.5} />
-				</span>
-				<div class="text-box">Forum</div>
-			</a>
-		</li>
-		<li>
 			<a href="/discover" class="flex flex-1 items-center space-x-[6px] rtl:space-x-reverse">
 				<span class="icon-box">
 					<IconBrandSafari stroke={1.5} />
 				</span>
 				<div class="text-box">Discover</div>
+			</a>
+		</li>
+		<li>
+			<a href="/projects/create" class="flex flex-1 items-center space-x-[6px] rtl:space-x-reverse">
+				<span class="icon-box">
+					<IconFolderPlus stroke={1.5} />
+				</span>
+				<div class="text-box">Launch Project</div>
+			</a>
+		</li>
+		<li>
+			<a href="/posts/create" class="flex flex-1 items-center space-x-[6px] rtl:space-x-reverse">
+				<span class="icon-box">
+					<IconCopyPlus stroke={1.5} />
+				</span>
+				<div class="text-box">Create Post</div>
 			</a>
 
 			<!-- {#if item.child}

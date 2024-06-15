@@ -8,6 +8,7 @@
 	export let labelClass = 'label-class-custom';
 	export let classMenuItems = 'mt-2 w-[220px]';
 	export let childComponent: any = null;
+	export let propValue: any = null;
 
 	export let items: any = [
 		{
@@ -75,7 +76,7 @@
 		>
 			{#if childComponent}
 				<div class={labelClass}>
-					<svelte:component this={childComponent} />
+					<svelte:component this={childComponent} {propValue} />
 				</div>
 			{/if}
 		</button>

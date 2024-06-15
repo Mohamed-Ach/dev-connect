@@ -17,6 +17,7 @@
 	export let cols: number = 30;
 	export let row: number = 3;
 	export let onChange: any = '';
+	export let value: string = '';
 </script>
 
 <div
@@ -43,6 +44,8 @@
 				{disabled}
 				{id}
 				{cols}
+				{name}
+				{value}
 				rows={row}
 				on:change={onChange}
 			></textarea>
@@ -54,6 +57,7 @@
 				{disabled}
 				{id}
 				{cols}
+				{value}
 				rows={row}
 				on:change={onChange}
 			></textarea>

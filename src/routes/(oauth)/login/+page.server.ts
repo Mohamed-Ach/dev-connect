@@ -1,51 +1,44 @@
-import { API_BASE_URL } from '$lib/store/index';
-import { fail, redirect } from '@sveltejs/kit';
-import fetch from 'node-fetch';
+import { fail, redirect, type Actions } from "@sveltejs/kit"
+import { client } from "$lib/lucia/prisma"
+import { Argon2id } from "oslo/password"
+import { auth } from "$lib/lucia"
 
-export const actions = {
+
+export const actions: Actions = {
     default: async ({ request, cookies }) => {
-        const formData = Object.fromEntries(await request.formData());
-
-        console.log(formData);
-
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: formData.email,
-                password: formData.password
-            })
-        };
-
-        let data: any;
-        try {
-            const response = await fetch(API_BASE_URL + '/user/login', options);
-            data = await response.json() as any;
-            console.log(data)
-            if (!response.ok) return fail(400, { error: data.error, loading: false });
-
-        } catch (error) {
-            console.log(error)
-            return fail(500, { error: "An error has occurred, Please try again!", loading: false })
-        }
-
-        // * Create a Session Cookie:
-        cookies.set('session', data.AccessToken, {
-            // send cookie for every page
-            path: '/',
-            // server side only cookie so you can't use `document.cookie`
-            httpOnly: true,
-            // only requests from same site can send cookies
-            // https://developer.mozilla.org/en-US/docs/Glossary/CSRF
-            sameSite: 'strict',
-            // only sent over HTTPS in production
-            secure: process.env.NODE_ENV === 'production',
-            // set cookie to expire after a month
-            maxAge: formData.keepSignedIn ? 60 * 60 * 24 * 30 : 60 * 60 * 24,
+        const { email, password } = Object.fromEntries(await request.formData()) as Record<string, string>
+        const user = await client.user.findUnique({
+            where: {
+                email: email
+            }
         })
 
-        throw redirect(302, '/on-boarding')
+        if (!user) {
+            return fail(400, { message: "Incorrect username or password" })
+        }
+
+        const validPassword = await new Argon2id().verify(user.password, password);
+        if (!validPassword) {
+            return fail(400, { message: "Incorrect username or password" })
+        }
+
+        if (!user.emailVerified) {
+            return fail(400, { error: "Your Email is not activated yet! Please check your inbox" })
+        }
+
+        const session = await auth.createSession(user.id, [])
+        const sessionCookie = auth.createSessionCookie(session.id);
+        cookies.set(sessionCookie.name, sessionCookie.value, {
+            path: ".",
+            ...sessionCookie.attributes
+        })
+
+
+        if (!user.onBoarded) {
+            return redirect(302, "/on-boarding")
+        }
+        else {
+            redirect(302, "/posts/browse")
+        }
     }
 }

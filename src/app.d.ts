@@ -5,6 +5,15 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			theme: string;
+			// user: {
+			// 	email: string,
+			// 	firstName: string,
+			// 	lastName: string,
+			// 	sex: string,
+			// 	avatar: string,
+			// } | null;
+			user: import("lucia").User | null;
+			session: import("lucia").Session | null;
 		}
 		// interface PageData {}
 		// interface PageState {}

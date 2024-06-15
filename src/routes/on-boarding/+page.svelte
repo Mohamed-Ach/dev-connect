@@ -10,6 +10,8 @@
 
 	// ** Import icons :
 	import IconArrowNarrowRight from '@tabler/icons-svelte/IconArrowNarrowRight.svelte';
+	import IconWoman from '@tabler/icons-svelte/IconWoman.svelte';
+	import IconMan from '@tabler/icons-svelte/IconMan.svelte';
 
 	// ** Import images :
 	import onBoarding from '$lib/images/all-img/on-boarding.png';
@@ -22,10 +24,12 @@
 
 	// Check if dark mode is enabled :
 	let isDark: boolean = $page.data.theme === 'dark';
+	import { applyAction, enhance } from '$app/forms';
 
 	// ** Section navigation :
 	let currentSection: number = 1;
 	let previousSection: number = 0;
+	let gender = '';
 </script>
 
 <div class={isDark ? 'dark' : 'light'}>
@@ -68,19 +72,38 @@
 							</ul>
 						</div>
 					</div>
-
-					{#if currentSection === 1}
+					<form
+						class="space-y-4"
+						method="POST"
+						use:enhance={() => {
+							return async ({ result }) => {
+								await applyAction(result);
+							};
+						}}
+					>
 						<section
 							id="section-1"
-							in:fly={{ x: currentSection > previousSection ? 50 : -50, duration: 250, delay: 200 }}
+							in:fly={{
+								x: currentSection > previousSection ? 50 : -50,
+								duration: 250,
+								delay: 200
+							}}
 							out:fly={{ x: currentSection > previousSection ? 50 : -50, duration: 250 }}
+							hidden={currentSection !== 1}
 						>
 							<h2 class="font-merriweather text-3xl font-bold text-gray-700">
 								Tell us about yourself
 							</h2>
 							<div class="mt-8 flex w-full flex-col pb-8">
 								<div class="relative mb-4">
-									<input class="peer hidden" id="radio_1" type="radio" name="radio" checked />
+									<input
+										class="peer hidden"
+										id="radio_1"
+										type="radio"
+										name="userType"
+										value="student"
+										checked
+									/>
 									<span
 										class="absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 dark:bg-slate-100/80 bg-white peer-checked:border-gray-900"
 									></span>
@@ -96,7 +119,13 @@
 									>
 								</div>
 								<div class="relative mb-4">
-									<input class="peer hidden" id="radio_2" type="radio" name="radio" />
+									<input
+										class="peer hidden"
+										id="radio_2"
+										type="radio"
+										name="userType"
+										value="hobbyist"
+									/>
 									<span
 										class="absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 dark:bg-slate-100/80 bg-white peer-checked:border-gray-900"
 									></span>
@@ -113,22 +142,48 @@
 								</div>
 								<div class="my-4 space-y-3">
 									<label for="terms" class="flex space-x-4">
-										<input
-											id="terms"
-											name="terms"
-											type="checkbox"
-											class="h-6 w-6 shrink-0 accent-gray-900"
-											checked
-										/>
-										<span id="terms-description" class="text-sm dark:text-slate-400 text-gray-600"
-											>I agree to the <a class="underline" href="/privacy">Terms and Conditions</a>.
-											Learn about our Privacy Policy and our measures to keep your data safe and
-											secure.</span
-										>
+										<h4 class="font-merriweather text-xl font-bold text-gray-700">You are a</h4>
 									</label>
+									<div class="flex align-center space-x-4 items-center">
+										<div class="flex items-center mb-4">
+											<input
+												id="male"
+												name="gender"
+												type="radio"
+												value="M"
+												class="hidden"
+												bind:group={gender}
+											/>
+											<label for="male" class="flex items-center cursor-pointer">
+												<span
+													class="cors w-4 h-4 inline-block mr-2 border border-gray-400 rounded-full"
+												></span>
+												<IconMan stroke={2} size={24} />
+												<span class="text-gray-700">Male</span>
+											</label>
+										</div>
+										<div class="flex items-center mb-4">
+											<input
+												id="female"
+												name="gender"
+												type="radio"
+												value="F"
+												class="hidden"
+												bind:group={gender}
+											/>
+											<label for="female" class="flex items-center cursor-pointer">
+												<span
+													class="cors w-4 h-4 inline-block mr-2 border border-gray-400 rounded-full"
+												></span>
+												<IconWoman stroke={2} size={24} />
+												<span class="text-gray-700">Female</span>
+											</label>
+										</div>
+									</div>
 								</div>
 
 								<button
+									type="button"
 									on:click={() => {
 										currentSection++;
 										previousSection = currentSection;
@@ -140,11 +195,16 @@
 								</button>
 							</div>
 						</section>
-					{:else if currentSection === 2}
+
 						<section
 							id="section-2"
-							in:fly={{ x: currentSection > previousSection ? 50 : -50, duration: 250, delay: 200 }}
+							in:fly={{
+								x: currentSection > previousSection ? 50 : -50,
+								duration: 250,
+								delay: 200
+							}}
 							out:fly={{ x: currentSection > previousSection ? 50 : -50, duration: 250 }}
+							hidden={currentSection !== 2}
 						>
 							<h2 class="font-merriweather text-3xl font-bold text-gray-700">
 								Experience and Skills
@@ -153,7 +213,7 @@
 								<TextInput
 									label="Choose a title for your profile :"
 									className="mb-4"
-									name="FullName"
+									name="title"
 									error={false}
 									validate={false}
 									isMask={false}
@@ -169,6 +229,7 @@
 									</label>
 									<!-- Select -->
 									<MultiSelect
+										name="languages"
 										placeholder="Select languages..."
 										options={languages}
 										ulOptionsStyle=""
@@ -189,6 +250,7 @@
 									</label>
 									<!-- Select -->
 									<MultiSelect
+										name="technologies"
 										placeholder="Select technologies..."
 										options={technologies}
 										ulOptionsStyle=""
@@ -208,6 +270,7 @@
 									</label>
 									<!-- Select -->
 									<MultiSelect
+										name="categories"
 										placeholder="Select Interests..."
 										options={categories}
 										ulOptionsStyle=""
@@ -223,6 +286,7 @@
 								</div>
 								<div class="flex justify-end items-end mb-4">
 									<button
+										type="button"
 										on:click={() => {
 											currentSection--;
 											previousSection = currentSection;
@@ -232,6 +296,7 @@
 										Previous</button
 									>
 									<button
+										type="button"
 										on:click={() => {
 											currentSection++;
 											previousSection = currentSection;
@@ -243,16 +308,30 @@
 								</div>
 							</div>
 						</section>
-					{:else if currentSection === 3}
+
 						<section
 							id="section-3"
-							in:fly={{ x: currentSection > previousSection ? 50 : -50, duration: 250, delay: 200 }}
+							in:fly={{
+								x: currentSection > previousSection ? 50 : -50,
+								duration: 250,
+								delay: 200
+							}}
 							out:fly={{ x: currentSection > previousSection ? 50 : -50, duration: 250 }}
+							hidden={currentSection !== 3}
 						>
 							<h2 class="font-merriweather text-3xl font-bold text-gray-700">
 								Goals and Expectations
 							</h2>
 							<div class="mt-8 flex w-full flex-col pb-8">
+								<TextArea
+									label="Tell us about yourself and your background (Bio):"
+									name="bio"
+									className="mb-4"
+									id="feedback"
+									placeholder="Type Here..."
+									row={4}
+								/>
+
 								<TextInput
 									label="What are your goals for using this platform? (e.g., learning new skills, helping others, finding friends, etc...)"
 									className="mb-4"
@@ -281,17 +360,9 @@
 									horizontal={false}
 								/>
 
-								<TextArea
-									label="What features or resources would you like to see on the platform?"
-									className="mb-4"
-									id="feedback"
-									name="feedback"
-									placeholder="Type Here..."
-									row={3}
-								/>
-
 								<div class="flex justify-end items-end">
 									<button
+										type="button"
 										on:click={() => {
 											currentSection--;
 											previousSection = currentSection;
@@ -301,6 +372,7 @@
 										Previous</button
 									>
 									<button
+										type="button"
 										on:click={() => {
 											currentSection++;
 											previousSection = currentSection;
@@ -312,11 +384,16 @@
 								</div>
 							</div>
 						</section>
-					{:else if currentSection === 4}
+
 						<section
 							id="section-4"
-							in:fly={{ x: currentSection > previousSection ? 50 : -50, duration: 250, delay: 200 }}
+							in:fly={{
+								x: currentSection > previousSection ? 50 : -50,
+								duration: 250,
+								delay: 200
+							}}
 							out:fly={{ x: currentSection > previousSection ? 50 : -50, duration: 250 }}
+							hidden={currentSection !== 4}
 						>
 							<h2 class="font-merriweather text-3xl font-bold text-gray-700">
 								Congratulations! You're all set.
@@ -331,6 +408,7 @@
 							<div class="mt-8 flex w-full flex-col pb-28">
 								<div class="flex justify-end items-end">
 									<button
+										type="button"
 										on:click={() => {
 											currentSection--;
 											previousSection = currentSection;
@@ -339,16 +417,16 @@
 									>
 										Previous</button
 									>
-									<a
-										href="/profile"
+									<button
+										type="submit"
 										class="px-5 my-2 rounded-md bg-gray-900 py-3 font-medium text-white"
 									>
-										Go to Profile</a
+										Go to Profile</button
 									>
 								</div>
 							</div>
 						</section>
-					{/if}
+					</form>
 				</div>
 			</div>
 		</div>
@@ -365,3 +443,16 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	input:checked + label span.cors {
+		background-color: #1f2937;
+		border-color: #1f2937;
+	}
+
+	label span {
+		transition:
+			background-color 0.2s,
+			border-color 0.2s;
+	}
+</style>

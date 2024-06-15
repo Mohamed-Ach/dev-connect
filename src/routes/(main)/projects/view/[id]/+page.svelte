@@ -1,24 +1,14 @@
 <script lang="ts">
-	// import Card from "@/components/ui/Card.svelte";
-	// import Icon from "@/components/ui/Icon.svelte";
-	// import GroupChart4 from "@/components/partials/widget/chart/group-chart-4.svelte";
-	// import DonutChart from "@/components/partials/widget/chart/donut-chart.svelte";
-	// import BasicArea from "@/components/partials/chart/appex-chart/BasicArea.svelte";
-	// import SelectMonth from "@/components/partials/SelectMonth.svelte";
-	// import TaskLists from "@/components/partials/widget/task-list.svelte";
-	// import MessageList from "@/components/partials/widget/message-list.svelte";
-	// import TrackingParcel from "@/components/partials/widget/activity.svelte";
-	// import TeamTable from "@/components/partials/table/team-table.svelte";
-	// import { meets, files } from "@/constant/data";
-	// import CalendarView from "@/components/partials/widget/CalendarView.svelte";
-	// import HomeBredCurbs from "@/components/partials/HomeBredCurbs.svelte";
-
 	// ** Import Components
-	import HomeBredCurbs from '$lib/components/partials/HomeBredCurbs.svelte';
 	import SelectMonth from '$lib/components/partials/SelectMonth.svelte';
 	import TaskList from '$lib/components/partials/TaskList.svelte';
-	import Card from '$lib/components/ui/Card.svelte';
 	import GroupChart from '$lib/components/ui/GroupChart.svelte';
+	import Card from '$lib/components/ui/Card.svelte';
+
+	// ** Icons
+	import IconFileInvoice from '@tabler/icons-svelte/IconFileInvoice.svelte';
+	import IconActivity from '@tabler/icons-svelte/IconActivity.svelte';
+	import IconBasket from '@tabler/icons-svelte/IconBasket.svelte';
 
 	const meets = [
 		{
@@ -75,6 +65,34 @@
 		}
 	];
 
+	const activities = [
+		{
+			img: '/assets/images/icon/file-1.svg',
+			title: 'Push Updates',
+			date: '06 June 2024'
+		},
+		{
+			img: '/assets/images/icon/pdf-1.svg',
+			title: 'Re-schedules tasks',
+			date: '06 June 2021 / 155MB'
+		},
+		{
+			img: '/assets/images/icon/zip-1.svg',
+			title: 'Job portal_app.zip',
+			date: '01 June 2024'
+		},
+		{
+			img: '/assets/images/icon/pdf-2.svg',
+			title: 'Prepare for presentation',
+			date: '25 May 2024'
+		},
+		{
+			img: '/assets/images/icon/scr-1.svg',
+			title: 'Launch new daily runs',
+			date: '20 Mai 2024'
+		}
+	];
+
 	// ** Import Icons
 </script>
 
@@ -84,9 +102,6 @@
 			<div class="grid md:grid-cols-2 grid-cols-1 gap-4">
 				<GroupChart />
 			</div>
-			<!-- <div class="bg-slate-50 dark:bg-slate-900 rounded-md p-4 mt-4">
-				<span class="block dark:text-slate-400 text-sm text-slate-600"> Progress </span>
-			</div> -->
 		</Card>
 		<Card
 			cardTitle="About project"
@@ -158,12 +173,8 @@
 						<div class="flex space-x-2 rtl:space-x-reverse">
 							<div class="flex-1 flex space-x-2 rtl:space-x-reverse">
 								<div class="flex-none">
-									<div class="h-8 w-8">
-										<img
-											src={item.img}
-											alt=""
-											class="block w-full h-full object-cover rounded-full border hover:border-white border-transparent"
-										/>
+									<div class="h-8 w-8 rounded border">
+										<IconBasket size={28} stroke={2} />
 									</div>
 								</div>
 								<div class="flex-1">
@@ -171,9 +182,6 @@
 										{item.title}
 									</span>
 									<span class="flex font-normal text-xs dark:text-slate-400 text-slate-500">
-										<span class="text-base inline-block mr-1">
-											<!-- <Icon icon="heroicons-outline:video-camera" /> -->
-										</span>
 										{item.meet}
 									</span>
 								</div>
@@ -193,54 +201,65 @@
 		<Card cardTitle="Task list" headerSlot={SelectMonth}>
 			<TaskList />
 		</Card>
-		<Card cardTitle="Messages" headerSlot={SelectMonth}>
-			<!-- <MessageList /> -->
-		</Card>
-		<Card cardTitle="Activity" headerSlot={SelectMonth}>
-			<!-- <TrackingParcel /> -->
-		</Card>
-	</div>
-	<div class="grid grid-cols-12 gap-5">
-		<div class="xl:col-span-8 lg:col-span-7 col-span-12">
-			<Card cardTitle="Team members" noBorder>
-				<!-- <TeamTable /> -->
-			</Card>
-		</div>
-		<div class="xl:col-span-4 lg:col-span-5 col-span-12">
-			<Card cardTitle="Files" headerSlot={SelectMonth}>
-				<ul class="divide-y divide-slate-100 dark:divide-slate-700">
-					{#each files as item}
-						<li class="block py-[8px]">
-							<div class="flex space-x-2 rtl:space-x-reverse">
-								<div class="flex-1 flex space-x-2 rtl:space-x-reverse">
-									<div class="flex-none">
-										<div class="h-8 w-8">
-											<img
-												src={item.img}
-												alt=""
-												class="block w-full h-full object-cover rounded-full border hover:border-white border-transparent"
-											/>
-										</div>
-									</div>
-									<div class="flex-1">
-										<span class="block text-slate-600 text-sm dark:text-slate-300">
-											{item.title}
-										</span>
-										<span class="block font-normal text-xs text-slate-500 mt-1">
-											{item.date}
-										</span>
+
+		<Card cardTitle="Files" headerSlot={SelectMonth}>
+			<ul class="divide-y divide-slate-100 dark:divide-slate-700">
+				{#each files as item}
+					<li class="block py-[8px]">
+						<div class="flex space-x-2 rtl:space-x-reverse">
+							<div class="flex-1 flex space-x-2 rtl:space-x-reverse">
+								<div class="flex-none">
+									<div class="h-8 w-8 border rounded">
+										<IconFileInvoice size={28} stroke={2} />
 									</div>
 								</div>
-								<div class="flex-none">
-									<button type="button" class="text-xs text-slate-900 dark:text-white">
-										Download
-									</button>
+								<div class="flex-1">
+									<span class="block text-slate-600 text-sm dark:text-slate-300">
+										{item.title}
+									</span>
+									<span class="block font-normal text-xs text-slate-500 mt-1">
+										{item.date}
+									</span>
 								</div>
 							</div>
-						</li>
-					{/each}
-				</ul>
-			</Card>
-		</div>
+							<div class="flex-none">
+								<button type="button" class="text-xs text-slate-900 dark:text-white">
+									Download
+								</button>
+							</div>
+						</div>
+					</li>
+				{/each}
+			</ul>
+		</Card>
+
+		<Card cardTitle="Activity" headerSlot={SelectMonth}>
+			{#each activities as item}
+				<li class="block py-[8px]">
+					<div class="flex space-x-2 rtl:space-x-reverse">
+						<div class="flex-1 flex space-x-2 rtl:space-x-reverse">
+							<div class="flex-none">
+								<div class="h-8 w-8 border rounded">
+									<IconActivity size={28} stroke={2} />
+								</div>
+							</div>
+							<div class="flex-1">
+								<span class="block text-slate-600 text-sm dark:text-slate-300">
+									{item.title}
+								</span>
+								<span class="block font-normal text-xs text-slate-500 mt-1">
+									{item.date}
+								</span>
+							</div>
+						</div>
+						<div class="flex-none">
+							<button type="button" class="text-xs text-slate-900 dark:text-white">
+								See more
+							</button>
+						</div>
+					</div>
+				</li>
+			{/each}
+		</Card>
 	</div>
 </div>

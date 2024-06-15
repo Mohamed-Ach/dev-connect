@@ -4,6 +4,7 @@
 	export let activeClass: string =
 		'ring-black-500 bg-slate-900 dark:bg-slate-700 dark:ring-slate-700';
 	export let disabled: boolean = false;
+	export let required: boolean = false;
 	export let value: boolean;
 	export let label: string;
 	export let name: string;
@@ -14,7 +15,7 @@
 	class={`flex items-center ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
 	{id}
 >
-	<input type="checkbox" class="hidden" {name} bind:checked={value} {id} {disabled} />
+	<input type="checkbox" class="hidden" {name} bind:checked={value} {id} {disabled} {required} />
 	<span
 		class={`h-4 w-4 border flex-none border-slate-100 dark:border-slate-800 rounded 
         inline-flex ltr:mr-3 rtl:ml-3 relative transition-all duration-150

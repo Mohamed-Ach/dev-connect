@@ -19,6 +19,8 @@
 	export let type: string;
 	export let error: any;
 	export let id: string;
+	export let value: string = '';
+	export let readonly: boolean = false;
 
 	let open = false;
 	const handleOpen = () => {
@@ -50,6 +52,8 @@
 				{id}
 				{name}
 				{required}
+				{value}
+				{readonly}
 			/>
 		{:else if !name && !isMask}
 			<input

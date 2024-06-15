@@ -31,9 +31,47 @@
 		pupil.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
 	}
 
+	const processes: { [key: string]: string }[] = [
+		{
+			login:
+				"To log in, enter your username and password on the <a class='font-bold' href='/login'>login page</a>. If you have forgotten your password, use the 'Forgot Password' link to reset it. Once you've entered your credentials, click the 'Log In' button to access your account."
+		},
+		{
+			register:
+				"To register, navigate to the <a class='font-bold' href='/register'>registration page</a> and fill out the form with your personal details, including your name, email address, and a secure password. You may also need to verify your email address by clicking a link sent to your inbox. Once completed, click the 'Register' button to create your new account."
+		},
+		{
+			'create account':
+				"To register, navigate to the <a class='font-bold' href='/register'>registration page</a> and fill out the form with your personal details, including your name, email address, and a secure password. You may also need to verify your email address by clicking a link sent to your inbox. Once completed, click the 'Register' button to create your new account."
+		},
+		{
+			'create post':
+				"To create a post, go to the <a class='font-bold' href='/posts/create'>Create Post</a> section of the website. Enter a title for your post and write your content in the provided text area. You can format your text and add images or videos as needed. When you are satisfied with your post, click the 'Publish' button to make it live."
+		},
+		{
+			'create project':
+				"To create a project, go to the <a class='font-bold' href='/projects'>Create Project</a> page. Fill in the project title, description, and any other required details. You can also add team members and set deadlines for your project. Once all information is complete, click the 'Create Project' button to start your project."
+		}
+	];
+
+	function fetchParagraph(question: string) {
+		const lowerCaseQuestion = question.toLowerCase();
+
+		for (const process of processes) {
+			for (const key in process) {
+				if (lowerCaseQuestion.includes(key.toLowerCase())) {
+					return process[key];
+				}
+			}
+		}
+
+		return "Sorry, I couldn't answer your question! Can you try an easier one? I'm still learning.";
+	}
+
 	let showMessage = false;
-	const message = writable('');
-	const fullMessage = 'Hi There, My name is KuriBot, your AI assistant. How can I help you?';
+	let message = writable('');
+	let fullMessage =
+		"Hi There, My name is <strong>KuriBot</strong>, your AI assistant. I can't answer everything but I will do my best to help you?";
 
 	function handleClick() {
 		if (!showMessage) {
@@ -49,6 +87,18 @@
 		if (index < text.length) {
 			message.update((m) => m + text.charAt(index));
 			setTimeout(() => typeWriter(text, index + 1), 50);
+		}
+	}
+
+	let userInput = '';
+	function handleKeyPress(event: any) {
+		if (event.key === 'Enter') {
+			event.preventDefault();
+			fullMessage = fetchParagraph(userInput);
+			message = writable('');
+			typeWriter(fullMessage, 0);
+
+			userInput = '';
 		}
 	}
 
@@ -78,10 +128,17 @@
 
 {#if showMessage}
 	<div class="message-popup">
-		{$message}
+		{@html $message}
 
 		{#if $message === fullMessage}
-			<input type="text" class="text-sm" placeholder="Type your message here..." />
+			<input
+				name="userInput"
+				type="text"
+				class="text-sm"
+				placeholder="Type your message here..."
+				bind:value={userInput}
+				on:keypress={handleKeyPress}
+			/>
 		{/if}
 		<div class="triangle"></div>
 	</div>

@@ -1,7 +1,6 @@
 <script lang="ts">
 	// ** Importing Libraries :
 	import { onMount } from 'svelte';
-	import { ToastContainer } from 'svelte-toasts';
 
 	// ** Importing Components :
 	import ProjectGrid from '$lib/components/partials/ProjectGrid.svelte';
@@ -13,7 +12,6 @@
 	// ** Importing Icons :
 	import IconLayoutGrid from '@tabler/icons-svelte/IconLayoutGrid.svelte';
 	import IconFilter from '@tabler/icons-svelte/IconFilter.svelte';
-	import IconPlus from '@tabler/icons-svelte/IconPlus.svelte';
 	import IconList from '@tabler/icons-svelte/IconList.svelte';
 
 	let width = 0;
@@ -90,11 +88,6 @@
 	let projects = fetchedProjects;
 
 	onMount(() => {
-		isLoaded = true;
-		setTimeout(() => {
-			isLoaded = false;
-		}, 1500);
-
 		const handleResize = () => {
 			width = window.innerWidth;
 		};
@@ -108,12 +101,11 @@
 
 <div style="opacity: 1; transform: none;">
 	<div class="w-full">
-		<ToastContainer />
 		<div class="flex flex-wrap justify-between items-center mb-8">
 			<h4
 				class="font-medium lg:text-2xl text-xl capitalize text-slate-900 inline-block ltr:pr-4 rtl:pl-4"
 			>
-				Project
+				Personal Projects
 			</h4>
 			<div
 				class="{width < breakpoints.md
@@ -149,13 +141,6 @@
 					className="{isFilter
 						? 'bg-slate-900 dark:bg-slate-700 text-white'
 						: 'bg-white dark:bg-slate-800 dark:text-slate-300'} h-min text-sm font-normal"
-				/>
-				<Button
-					type="anchor"
-					link="/projects/add"
-					text="Add Project"
-					icon={IconPlus}
-					className="btn-dark dark:bg-slate-800 h-min text-sm font-normal"
 				/>
 			</div>
 		</div>

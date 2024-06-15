@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
-
 	// Importing Images :
 	import logoWhite from '$lib/images/logo/logo-white.svg';
 	import logo from '$lib/images/logo/logo.svg';
@@ -22,12 +19,14 @@
 	import IconChartBubbleFilled from '@tabler/icons-svelte/IconChartBubbleFilled.svelte';
 
 	// Importing Components :
+	import Assistant from '$lib/components/partials/Assistant.svelte';
+	import SwitchDark from '$lib/components/tools/SwitchDark.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
-	import SwitchDark from '$lib/components/tools/SwitchDark.svelte';
 
 	// Check if dark mode is enabled :
-	let isDark: boolean = $page.data.theme === 'dark';
+	export let data;
+	let isDark: boolean = data.theme === 'dark';
 	function handleThemeChange(event: CustomEvent<{ isDark: boolean }>) {
 		isDark = event.detail.isDark;
 	}
@@ -43,7 +42,11 @@
 					</a>
 				</div>
 				<div class="flex justify-center items-center">
-					<Button text="Login" link="/login" className="btn-outline-dark btn-sm" />
+					{#if data.user}
+						<Button text="Profile" link="/profile" className="btn-outline-dark btn-sm" />
+					{:else}
+						<Button text="Login" link="/login" className="btn-outline-dark btn-sm" />
+					{/if}
 					<SwitchDark {isDark} on:themeChange={handleThemeChange} ClassName="md:pl-2 pl-3" />
 				</div>
 			</div>
@@ -71,7 +74,11 @@
 							class="flex-1 bg-transparent h-full block w-full py-6 placeholder:text-secondary-500 text-base focus:outline-none focus:ring-0"
 						/>
 						<div class="flex-none">
-							<button type="button" class="btn btn-dark btn-sm px-6"> Join Us </button>
+							{#if !data.user}
+								<Button text="Join Us" link="/register" className="btn-dark btn-sm px-6" />
+							{:else}
+								<Button text="Discover" link="/posts/browse" className="btn-dark btn-sm px-6" />
+							{/if}
 						</div>
 					</div>
 					<div class="text-sm text-slate-500 dark:text-slate-400">
@@ -110,7 +117,11 @@
 							</div>
 							<div class="mt-4 space-x-4 rtl:space-x-reverse">
 								<a href="null" class="btn-link"> Learn more </a>
-								<a href="/register" class="btn-link"> Join us now</a>
+								{#if !data.user}
+									<a href="/register" class="btn-link"> Join us now</a>
+								{:else}
+									<a href="/posts/browse" class="btn-link">Discover</a>
+								{/if}
 							</div>
 						</Card>
 						<Card cardTitle="Create" cardSubtitle="" headerSlot="">
@@ -321,3 +332,5 @@
 		</div>
 	</div>
 </div>
+
+<Assistant />

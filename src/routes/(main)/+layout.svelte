@@ -9,7 +9,6 @@
 
 	// import { onMount } from 'svelte';
 	// import { useRouter } from 'svelte-routing';
-	// import { ToastContainer } from 'react-toastify';
 
 	/*
 	import Footer from '@/components/partials/header.svelte';
@@ -104,10 +103,12 @@
 			window.removeEventListener('resize', handleResize);
 		};
 	});
+
+	export let data;
 </script>
 
 <div dir="ltr" class="app-warp {isDark ? 'dark' : 'light'} skin--default has-floating">
-	<Header {isDark} on:themeChange={handleThemeChange} />
+	<Header {data} {isDark} on:themeChange={handleThemeChange} />
 	<!-- <ToastContainer /> -->
 	<!-- {#if menuType === 'vertical' && width > breakpoints.xl && !menuHidden}
 		<Sidebar />

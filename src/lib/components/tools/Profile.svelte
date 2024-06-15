@@ -16,9 +16,16 @@
 		isOpen = false;
 		goto(url);
 	};
+
+	export let data;
 </script>
 
-<Dropdown open={isOpen} childComponent={ProfileImage} classMenuItems="w-[180px] top-[58px]">
+<Dropdown
+	open={isOpen}
+	childComponent={ProfileImage}
+	propValue={data}
+	classMenuItems="w-[180px] top-[58px]"
+>
 	<div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->

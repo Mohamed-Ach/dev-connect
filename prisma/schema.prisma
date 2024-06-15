@@ -1,0 +1,65 @@
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model Widget {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+}
+
+
+model User {
+    id              String             @id @map("_id")
+    email           String             @unique
+
+    // Personal Information
+    firstName       String
+    lastName        String
+    sex             String             @default("")
+
+    // Dev Information
+    title           String             @default("")
+    bio             String             @default("")
+    avatar          String             @default("")
+    programmingLang String[]
+    techStack       String[]
+    intrests        String[]
+
+    // Meta Data
+    emailVerified   Boolean            @default(false)
+    onBoarded       Boolean            @default(false)
+    createAt     DateTime              @default(now())
+    updatedAt     DateTime             @updatedAt
+
+
+    password        String
+    sessions        Session[]
+}
+
+model Session {
+  id                String   @id @map("_id")
+  userId            String
+  expiresAt         DateTime
+  user              User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
+
+model Email_Verification {
+  id          String @id @map("_id") 
+  user_id     String @unique
+  email       String
+  expires_at  DateTime
+
+  @@index([user_id])
+}

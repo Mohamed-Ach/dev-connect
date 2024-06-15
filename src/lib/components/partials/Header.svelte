@@ -50,6 +50,8 @@
 			window.removeEventListener('resize', handleResize);
 		};
 	});
+
+	export let data;
 </script>
 
 <header class="sticky top-0 z-[999]">
@@ -86,7 +88,7 @@
 
 				{#if width >= breakpoints.md}
 					<Message />
-					<Profile />
+					<Profile {data} />
 				{/if}
 
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
