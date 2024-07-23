@@ -7,9 +7,6 @@
 	import Footer from '$lib/components/partials/Footer.svelte';
 	import Header from '$lib/components/partials/Header.svelte';
 
-	// import { onMount } from 'svelte';
-	// import { useRouter } from 'svelte-routing';
-
 	/*
 	import Footer from '@/components/partials/header.svelte';
 	import Sidebar from '@/components/partials/sidebar.svelte';

@@ -21,7 +21,7 @@
 			img: '/assets/images/svg/path.svg',
 			title: 'Design meeting (team)',
 			date: '01 Nov 2021',
-			meet: 'Skyp meeting'
+			meet: 'Skype meeting'
 		},
 		{
 			img: '/assets/images/svg/dc.svg',
@@ -45,7 +45,7 @@
 		},
 		{
 			img: '/assets/images/icon/pdf-1.svg',
-			title: 'Ecommerce.pdf',
+			title: 'E-commerce.pdf',
 			date: '06 June 2021 / 155MB'
 		},
 		{
@@ -55,7 +55,7 @@
 		},
 		{
 			img: '/assets/images/icon/pdf-2.svg',
-			title: 'Ecommerce.pdf',
+			title: 'E-commerce.pdf',
 			date: '06 June 2021 / 155MB'
 		},
 		{

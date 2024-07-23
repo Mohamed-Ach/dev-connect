@@ -24,14 +24,19 @@
 			errorEmail = '';
 		}
 	};
+
+	// ** Form Submission :
+	let formLoading: boolean = false;
 </script>
 
 <form
 	class="space-y-4"
 	method="POST"
+	on:submit={() => (formLoading = true)}
 	use:enhance={() => {
 		return async ({ result }) => {
 			await applyAction(result);
+			formLoading = false;
 		};
 	}}
 >

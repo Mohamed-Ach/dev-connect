@@ -4,9 +4,12 @@ import { Argon2id } from "oslo/password"
 import { auth } from "$lib/lucia"
 
 
+
 export const actions: Actions = {
-    default: async ({ request, cookies }) => {
+    default: async ({ request, cookies, url }) => {
         const { email, password } = Object.fromEntries(await request.formData()) as Record<string, string>
+        const redirectUrl = url.searchParams.get("redirect") || ""
+
         const user = await client.user.findUnique({
             where: {
                 email: email
@@ -14,12 +17,12 @@ export const actions: Actions = {
         })
 
         if (!user) {
-            return fail(400, { message: "Incorrect username or password" })
+            return fail(400, { error: "Incorrect username or password" })
         }
 
         const validPassword = await new Argon2id().verify(user.password, password);
         if (!validPassword) {
-            return fail(400, { message: "Incorrect username or password" })
+            return fail(400, { error: "Incorrect username or password" })
         }
 
         if (!user.emailVerified) {
@@ -38,7 +41,7 @@ export const actions: Actions = {
             return redirect(302, "/on-boarding")
         }
         else {
-            redirect(302, "/posts/browse")
+            redirect(302, redirectUrl ? "/" + redirectUrl.slice(1) : "/posts/browse")
         }
     }
 }

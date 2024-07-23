@@ -121,6 +121,10 @@ export default {
         },
       },
 
+      width: {
+        '128': '32rem', // Custom width value
+      },
+
       fontFamily: {
         inter: ["Inter", "sans-serif"],
         merriweather: ['Merriweather', 'sans-serif'],

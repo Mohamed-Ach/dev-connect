@@ -5,8 +5,8 @@
 	const currentYear: number = new Date().getFullYear();
 
 	// importing images :
-	import logo from '$lib/images/logo/logo.svg';
 	import logoWhite from '$lib/images/logo/logo-white.svg';
+	import logo from '$lib/images/logo/logo.svg';
 	import ils1 from '$lib/images/auth/ils1.svg';
 
 	// Check if dark mode is enabled :
@@ -39,8 +39,20 @@
 			<div class="right-column relative">
 				<div class="inner-content h-full flex flex-col bg-white dark:bg-slate-800">
 					<slot />
+
 					<div class="auth-footer text-center">
 						&copy; Copyright {currentYear}, Dev Connect All Rights Reserved.
+					</div>
+					<div class="auth-footer text-center">
+						Crafted with <span class="text-red-500 dark:text-red-400">❤</span> by{' '}
+						<!-- svelte-ignore a11y-mouse-events-have-key-events -->
+						<a
+							href="https://github.com/Mohamed-Ach"
+							target="_blank"
+							class="text-primary-600 dark:text-primary-400 font-bold hover:underline"
+						>
+							Mohamed Ach
+						</a>
 					</div>
 				</div>
 			</div>

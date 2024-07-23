@@ -54,6 +54,9 @@
 		messFeed = [...messFeed, message];
 	}
 
+	let index = 0;
+	const arr = ["Yo, What's up Bro?", 'I am good', 'I currently working on the auth feature'];
+
 	function sendMessage() {
 		if (message.trim() !== '') {
 			const sentMessage: MessFeed = {
@@ -63,6 +66,18 @@
 			};
 			messFeed = [...messFeed, sentMessage];
 			message = '';
+
+			setTimeout(function () {
+				const receivedMessage: MessFeed = {
+					content: arr[index],
+					sender: 'them',
+					img: user2
+				};
+				messFeed = [...messFeed, receivedMessage];
+				message = '';
+
+				index++;
+			}, 2000);
 		}
 	}
 

@@ -12,6 +12,7 @@
 	import IconEdit from '@tabler/icons-svelte/IconEdit.svelte';
 	import IconEye from '@tabler/icons-svelte/IconEye.svelte';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	export let projects;
 
@@ -93,7 +94,7 @@
 										{#each project.assignee.slice(0, 3) as user}
 											<div class="h-6 w-6 rounded-full ring-1 ring-slate-100">
 												<img
-													src="http://localhost:5173/api/images/users/{user.image}"
+													src="{$page.url.origin}/api/images/users/{user.image}"
 													alt="assignee"
 													class="w-full h-full rounded-full"
 												/>

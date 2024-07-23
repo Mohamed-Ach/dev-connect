@@ -11,24 +11,25 @@ export const handle: Handle = async ({ event, resolve }) => {
     // ** verify if the user is authenticated
     const sessionId = event.cookies.get(auth.sessionCookieName)
 
-    if (!sessionId && event.url.pathname.startsWith("/posts")) {
-        throw redirect(302, "/login")
+    const protectedRoutes = [
+        "/posts",
+        "/projects",
+        "/discover",
+        "/profile",
+        "/settings",
+        "/chat",
+        "/amazon-runner",
+        "test",
+        "api"
+    ]
+    for (const route of protectedRoutes) {
+        if (event.url.pathname.startsWith(route)) {
+            if (!sessionId) {
+                throw redirect(302, "/login?redirect=" + event.url.pathname)
+            }
+        }
     }
-    if (!sessionId && event.url.pathname.startsWith("/projects")) {
-        throw redirect(302, "/login")
-    }
-    if (!sessionId && event.url.pathname.startsWith("/discover")) {
-        throw redirect(302, "/login")
-    }
-    if (!sessionId && event.url.pathname.startsWith("/profile")) {
-        throw redirect(302, "/login")
-    }
-    if (!sessionId && event.url.pathname.startsWith("/settings")) {
-        throw redirect(302, "/login")
-    }
-    if (!sessionId && event.url.pathname.startsWith("/chat")) {
-        throw redirect(302, "/login")
-    }
+
     if (!sessionId) {
         event.locals.user = null
         event.locals.session = null

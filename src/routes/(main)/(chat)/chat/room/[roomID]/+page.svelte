@@ -15,7 +15,6 @@
 	import user1 from '$lib/images/users/user-1.jpg';
 	import user2 from '$lib/images/users/user-2.jpg';
 	import user7 from '$lib/images/users/user-7.png';
-	import denniz from '$lib/images/users/denniz.jpg';
 	import abde from '$lib/images/users/abde.jpg';
 
 	let width = 1920;
