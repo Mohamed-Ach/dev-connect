@@ -78,6 +78,7 @@
 				{disabled ? ' opacity-40 cursor-not-allowed' : ''} {className}"
 		{disabled}
 		on:click={actionFunction}
+		{...$$restProps}
 	>
 		<span class="flex items-center">
 			<span>{text}</span>

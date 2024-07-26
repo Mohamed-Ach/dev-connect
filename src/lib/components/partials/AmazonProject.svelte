@@ -48,7 +48,7 @@
 	// Function to calculate the remaining time
 	function calculateTimeRemaining() {
 		const currentTime = Date.now();
-		const targetTime = new Date(workflowStatus.triggeredAt).getTime() + 60 * 1000;
+		const targetTime = new Date(workflowStatus.triggeredAt).getTime() + 75 * 1000;
 		return Math.max(0, Math.floor((targetTime - currentTime) / 1000));
 	}
 
@@ -144,13 +144,23 @@
 										};
 									}}
 								>
-									<Button
-										type="button"
-										text="Launch"
-										className="btn-primary btn-sm w-28"
-										isLoading={loading}
-										disabled={workflowStatus.status === 'Running'}
-									/>
+									{#if workflowStatus.status === 'Running'}
+										<Button
+											className="btn-danger btn-sm w-28"
+											formaction="?/cancel"
+											type="button"
+											text="Cancel"
+											isLoading={loading}
+										/>
+									{:else}
+										<Button
+											className="btn-primary btn-sm w-28"
+											formaction="?/launch"
+											type="button"
+											text="Launch"
+											isLoading={loading}
+										/>
+									{/if}
 								</form>
 							</td>
 						</tr>
