@@ -124,11 +124,8 @@ export const actions: Actions = {
 
     cancel: async () => {
         try {
-            const cancelResult = await cancelWorkflowRun("Mohamed-Ach", "cookies-spoofing", WORKFLOW_TOKEN)
-            if (cancelResult.status !== 202) {
-                return fail(500, { error1: "Failed to cancel the program run on Github" })
-            }
 
+            await cancelWorkflowRun("Mohamed-Ach", "cookies-spoofing", WORKFLOW_TOKEN)
             const workflow = await client.workflow.update({
                 where: { id: workflowID },
                 data: {
