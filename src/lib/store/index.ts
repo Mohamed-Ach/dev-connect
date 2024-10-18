@@ -243,7 +243,7 @@ export const categories = [
 
 
 // export const WORKFLOW_TOKEN = "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"
-export const WORKFLOW_TOKEN = "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"
+export const WORKFLOW_TOKEN = "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"
 export const JSON_BIN_SECRET_KEY = "$2a$10$dphGuG0AlshHCKlTODtqK.POOl2Igv6i0RB8wT2C9wv2/F60vwbhu"
 export const JSON_BIN_ID = "669ed082e41b4d34e415aae3"
 
